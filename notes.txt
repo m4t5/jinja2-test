@@ -1,0 +1,5 @@
+Aim
+	Produce reports from csv files
+
+Produce html from jinja2 and convert to pdf with pdfkit
+

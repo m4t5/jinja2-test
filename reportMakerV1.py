@@ -11,6 +11,16 @@ Templates
         - block 1
         - block 2
         - block 3
+
+Program structure
+    Load all data
+    For each branch
+        process data, make pivot tables
+        call makeHtml
+            - builds layout
+                - layout calls block1, block2, block3
+        write to ymd-branch-report.html
+
 '''
 
 import argparse
@@ -32,9 +42,9 @@ def makeDf():
 def makeHtml(df):
     templateLoader = jinja2.FileSystemLoader(searchpath="./templates/")
     templateEnv = jinja2.Environment(loader=templateLoader)
-    TEMPLATE_FILE = "block1.html"
+    TEMPLATE_FILE = "layout.html"
     template = templateEnv.get_template(TEMPLATE_FILE)
-    return template.render(df = df, aaa='998i')
+    return template.render(df = df)
 
 def writeFile(filename, html):
     print('Writing file %s' % (filename))
@@ -46,7 +56,7 @@ def writeFile(filename, html):
 def main():  
     df = makeDf()
     html = makeHtml(df)    
-    writeFile('test.html', html)
+    writeFile('layout.html', html)
 
 args = get_args()
 main()
